@@ -137,6 +137,7 @@ def make_stl(cyl_rad, gap, angle):
     #scad_render_to_file(isect, "lattice_dogbone.scad")
     scad_render_to_file(full_model, scad_fname)
 
+    # https://en.m.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_OpenSCAD_in_a_command_line_environment
     command = f"openscad -o {stl_fname} {scad_fname}"
 
     print(f"Converting {scad_fname} to {stl_fname}")
