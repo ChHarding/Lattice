@@ -51,6 +51,7 @@ def make_stl(cyl_rad, gap, angle):
 
         strands.add(tc) # add to union
 
+    scad_render_to_file(strands, "strands.scad")
 
 
     # make  clipping box that delineates the actual latice body filled with strands
@@ -85,6 +86,7 @@ def make_stl(cyl_rad, gap, angle):
     isect  = intersection()
     isect.add(box)
     isect.add(strands)
+    scad_render_to_file(isect, "isect.scad")
 
 
 
@@ -151,11 +153,12 @@ gap = 15
 angle = 45
 
 
-#make_stl(1.6, 20, 45)
+make_stl(1.6, 8, 30)
+'''
 for angle in (25, 30, 35, 40, 45):
     for rad in (2, 1.8, 1.6, 1.4): 
         for gap in (16, 14, 12, 10, 8):
             make_stl(rad, gap, angle)
-
+'''
 
 print("done")
