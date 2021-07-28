@@ -8,13 +8,13 @@
 - Cylinder is aproximated with 6 sides and rotated so that a flat side is down (for 3D printing) 
 
 This shows the pre-clip lattice:
-![](imgs\lattice.PNG)
+![](\imgs\lattice.PNG)
 
 - before clipping 2 cylinders are posted left and right (will be clipped in half) to provide a frame. 2 cylinder with 1.6 mm radius will be added on top and bottom to connect to the non-central D363 parts
 
 - This shows clipped lattice:
 
-![](imgs\clipped.PNG)
+![](\imgs\clipped.PNG)
 
 - Realistically, h values makes only sense from 1 up to and including 4. Good v values vary depending on h. Heres h=4 for v from 24 to 60:
-![](imgs\dogbones.PNG)
+![](\imgs\dogbones.PNG)
