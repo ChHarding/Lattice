@@ -34,7 +34,7 @@ This shows the pre-clip lattice:
     - layer height?
     - material (good candidates are PLA, possibly annealed and PC (tricky to print, needs 250/260 C)
     - forcing the fill to go more regularly from one side to the other, rather than jumping around:
-    - ![](/imgs/3dprint.gif) 
+    - ![](https://github.com/ChHarding/Lattice/blob/main/imgs/3Dprint.gif) 
     - 
   <img "src=https://github.com/ChHarding/Lattice/blob/main/imgs/3Dprint.gif">
 
