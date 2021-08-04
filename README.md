@@ -22,20 +22,6 @@ This shows the pre-clip lattice:
 - Realistically, h values makes only sense from 1 up to and including 4. Good v values vary depending on h. Heres h=4 for v from 24 to 60:
 ![](/imgs/dogbones.PNG)
 
-### 3D printing (Cura profile, future topic)
-- To increase tensile strength, I think it makes sense to set up a Cura profile with:
-    - only 1 wall
-    - only top/buttom (i.e. no infill!)
-    - pattern as lines
-    - directions along the strand orientation, flipping each layer (this is why the angle needs to be recorded!)
-
-![](/imgs/dogbone_print_orientation.png)
-- open topics:
-    - layer height?
-    - material (good candidates are PLA, possibly annealed and PC (tricky to print, needs 250/260 C)
-    - forcing the fill to go more regularly from one side to the other, rather than jumping around:
-    - ![](https://github.com/ChHarding/Lattice/blob/main/imgs/3Dprint.gif) 
-
 ## File format conversions
 - Initial model is created programatically in SCAD (but using https://github.com/SolidCode/SolidPython) and saved in a scad file (which are not pushed to github as it's just an intermediate format)
 - I create a "no-stamp" version first (w/o the parameters relief-printed) and save this as *_ns.scad, then add the reliefs and save this as *.scad
@@ -52,3 +38,16 @@ This shows the pre-clip lattice:
 1) https://youtu.be/LTmuwfyYUJQ?t=252  Testing Carbon fiber infused Co-polyester (expensive, needs high-temp 3D printing 250 C).More info: https://www.patreon.com/posts/filament-test-16238656
 2) https://youtu.be/uAoZCpXoPWo?t=344  Compares Tensile strength of normal PLA (here called Polylite) with a PLA "PLus" material  (which has some additives ...) PLA PLus is weaker but has a ductile phase that normal PLA doesn't, it just ends in brittle failure.
 3) https://youtu.be/ycGDR752fT0?t=492  Tensile stength test (and other tests) on common materials, uses a hook test (not a dogbone). blog here with more details: https://www.cnckitchen.com/blog/comparing-pla-petg-amp-asa-feat-prusament  
+
+### 3D printing (Cura profile, future topic)
+- To increase tensile strength, I think it makes sense to set up a Cura profile with:
+    - only 1 wall
+    - only top/bottom layers (i.e. no infill layers) with no skin
+    - pattern as lines
+    - directions along the strand orientation, flipping each layer (this is why the angle needs to be recorded!)
+
+![](/imgs/dogbone_print_orientation.png)
+- open topics:
+    - layer height?
+    - material? (good candidates are PLA, possibly annealed and PC (tricky to print, needs 250/260 C)
+    - how to force the fill to go more regularly from one side to the other? (rather than jumping around): ![](https://github.com/ChHarding/Lattice/blob/main/imgs/3Dprint.gif) 
