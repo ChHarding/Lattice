@@ -4,6 +4,7 @@
 
 - Lattice is made from crossing "strands" (symmetrical)
 - Lattice is defined by a radius, a number of horizontal steps h (must be ints) and a number of vertical steps v
+- h and v values will be relief stamped into teh STL files, along with the angle (aXXXXX), which is useful for setting up tracks parallel to the strand orientation in 3D printing.  
 - Lattice will clipped and be placed at the center of a D363 Type 1 dogbone
 - The central part is 13 mm in x, 3.2 mm in y and 57 mm in z  
 - The radius of the cylinders is always 1.6 mm to match the thickness of the dogbone
@@ -27,7 +28,13 @@ This shows the pre-clip lattice:
 - The no-stamp model file is then loaded/imported into FreeCAD (using its Python package/binding), rendered (which takes a long time!) and then exported into a STEP file (step folder)
 - The with-stamp model file is given to the CLI version of Open SCAD, rendered and exported as STL (stl folder) 
 
-## Tensile strength test links (ongoing)
+## Preview and Downloading
+- STL files can be previewed on github
+- stl/combos contains some collections of models I made so that their parameter changes can more easily be compared.
+- STEP files __cannot__ be previewed (well, the show up as text files ...)
+- To download a STEP file, right-click on its name/link on the left column) and save it manually with something like _Save link As.._
+
+## Tensile strength test of 3D printed dogbones - links (ongoing)
 1) https://youtu.be/LTmuwfyYUJQ?t=252  Testing Carbon fiber infused Co-polyester (expensive, needs high-temp 3D printing 250 C).More info: https://www.patreon.com/posts/filament-test-16238656
 2) https://youtu.be/uAoZCpXoPWo?t=344  Compares Tensile strength of normal PLA (here called Polylite) with a PLA "PLus" material  (which has some additives ...) PLA PLus is weaker but has a ductile phase that normal PLA doesn't, it just ends in brittle failure.
 3) https://youtu.be/ycGDR752fT0?t=492  Tensile stength test (and other tests) on common materials, uses a hook test (not a dogbone). blog here with more details: https://www.cnckitchen.com/blog/comparing-pla-petg-amp-asa-feat-prusament  
