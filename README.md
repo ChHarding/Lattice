@@ -35,8 +35,6 @@ This shows the pre-clip lattice:
     - material (good candidates are PLA, possibly annealed and PC (tricky to print, needs 250/260 C)
     - forcing the fill to go more regularly from one side to the other, rather than jumping around:
     - ![](https://github.com/ChHarding/Lattice/blob/main/imgs/3Dprint.gif) 
-    - 
-  <img "src=https://github.com/ChHarding/Lattice/blob/main/imgs/3Dprint.gif">
 
 ## File format conversions
 - Initial model is created programatically in SCAD (but using https://github.com/SolidCode/SolidPython) and saved in a scad file (which are not pushed to github as it's just an intermediate format)
