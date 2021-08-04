@@ -22,6 +22,19 @@ This shows the pre-clip lattice:
 - Realistically, h values makes only sense from 1 up to and including 4. Good v values vary depending on h. Heres h=4 for v from 24 to 60:
 ![](/imgs/dogbones.PNG)
 
+### 3D printing (Cura profile, future topic)
+- To increase tensile strength, I think it makes sense to set up a Cura profile with:
+    - only 1 wall
+    - only top/buttom (i.e. no infill!)
+    - pattern as lines
+    - directions along the strand orientation, flipping each layer (this is why the angle needs to be recorded!)
+
+![](/imgs/dogbone_print_orientation.png)
+- open topics:
+    - layer height?
+    - material (good candidates are PLA, possibly annealed and PC (tricky to print, needs 250/260 C)
+    - forcing the fill to go more regularly from one side to the other, rather than jumping around:![](/imgs/3dprint.gif)
+
 ## File format conversions
 - Initial model is created programatically in SCAD (but using https://github.com/SolidCode/SolidPython) and saved in a scad file (which are not pushed to github as it's just an intermediate format)
 - I create a "no-stamp" version first (w/o the parameters relief-printed) and save this as *_ns.scad, then add the reliefs and save this as *.scad
