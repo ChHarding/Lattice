@@ -38,9 +38,18 @@ This shows the pre-clip lattice:
 1) https://youtu.be/LTmuwfyYUJQ?t=252  Testing Carbon fiber infused Co-polyester (expensive, needs high-temp 3D printing 250 C).More info: https://www.patreon.com/posts/filament-test-16238656
 2) https://youtu.be/uAoZCpXoPWo?t=344  Compares Tensile strength of normal PLA (here called Polylite) with a PLA "PLus" material  (which has some additives ...) PLA PLus is weaker but has a ductile phase that normal PLA doesn't, it just ends in brittle failure.
 3) https://youtu.be/ycGDR752fT0?t=492  Tensile stength test (and other tests) on common materials, uses a hook test (not a dogbone). blog here with more details: https://www.cnckitchen.com/blog/comparing-pla-petg-amp-asa-feat-prusament  
+4) Comparisons (incl. ABS/carbon composite) https://toner-plastics.com/tesile-testing-results-of-toner-plastics-3d-filament/ 
+5) https://www.protolabs.com/resources/blog/tensile-testing-for-3d-printing-materials/ 
+6) https://onlinelibrary.wiley.com/doi/10.1002/pc.26187 (includes wetness, which is bad!)
+7) https://www.researchgate.net/publication/308709141_Materials_Testing_of_3D_Printed_ABS_and_PLA_Samples_to_Guide_Mechanical_Design (includes FEM analysis)
+8) https://www.mdpi.com/1996-1944/13/2/352/htm (Talks about temperature anealing of ABS)
+9) https://www.uni-miskolc.hu/~microcad/publikaciok/2018/b/B_Halapi_David.pdf (good overview and categorization of all materials)
+10) https://mendelnet.cz/pdfs/mnt/2018/01/90.pdf
+11) https://nvlpubs.nist.gov/nistpubs/ir/2015/NIST.IR.8059.pdf NIST additive manufacturing testing standards (more than tensile strength)
 
 ### 3D printing (Cura profile, future topic)
 - To increase tensile strength, I think it makes sense to set up a Cura profile with:
+    - no part cooling(!)
     - only 1 wall
     - only top/bottom layers (i.e. no infill layers) with no skin
     - pattern as lines
