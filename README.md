@@ -1,5 +1,9 @@
 # Lattice - make lattice dogbones
 
+![Python](https://img.shields.io/badge/python-%2314354C.svg?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![BootStrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+
 - Lattice is made from crossing "strands" (symmetrical)
 - Lattice is defined by a radius, a number of horizontal steps h (must be ints) and a number of vertical steps v
 - Lattice will clipped and be placed at the center of a D363 Type 1 dogbone
@@ -18,3 +22,11 @@ This shows the pre-clip lattice:
 
 - Realistically, h values makes only sense from 1 up to and including 4. Good v values vary depending on h. Heres h=4 for v from 24 to 60:
 ![](/imgs/dogbones.PNG)
+
+
+
+## Tensile strength test
+
+- https://youtu.be/LTmuwfyYUJQ?t=252  Testing Carbon fiber infused Co-polyester (expensive, needs high-temp 3D printing 250 C).More info: https://www.patreon.com/posts/filament-test-16238656
+- https://youtu.be/uAoZCpXoPWo?t=344  Compares Tensile strength of normal PLA (here called Polylite) with a PLA "PLus" material  (which has some additives ...) PLA PLus is weaker but has a ductile phase that normal PLA doesn't, it just ends in brittle failure.
+- https://youtu.be/ycGDR752fT0?t=492  Tensile stength test (and other tests) on common materials, uses a hook test (not a dogbone). blog here with more details: https://www.cnckitchen.com/blog/comparing-pla-petg-amp-asa-feat-prusament  

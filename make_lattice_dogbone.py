@@ -30,10 +30,10 @@ def make_stl(cyl_rad, hsteps, vsteps):
     cyl_ht = 200  # make very long so they can be rotated by sth like 45 dgs and still fill the area
     cyl_lst = []
     num_cyls = 20 # always make that many cyls, will get clipped (TODO: set this based on angle)
-    fn = 6 # number of facets
+    fn = 8 # number of facets
     for c in range(0, num_cyls):
         c = cylinder(r=cyl_rad, h=cyl_ht, center=True).add_param('$fn', fn) # set fidelity
-        c = rotate([0, 0, 60])(c) # flat side on bottom, depends on facets
+        #c = rotate([0, 0, 60])(c) # flat side on bottom, depends on facets
         #c = scale((1, 1.6/cyl_rad, 1))(c) # make y dimension always be 3.2
         cyl_lst.append(c)
 
@@ -114,35 +114,79 @@ def make_stl(cyl_rad, hsteps, vsteps):
     pdiff.add(p)
     pdiff.add(box2)
 
-
-    # make text and remove from dogbone (=> relief)
-    txt = union()
-    t = text(text=f"h{hsteps}", size=5, spacing=1.1)  # g{gap} a{angle}
-    t = linear_extrude(height=1)(t)
-    t = rotate((90,0,0))(t)
-    t = translate((-6,-1, 75))(t)
-    txt.add(t)
-    t = text(text=f"v{vsteps}", size=5, spacing=1.1)  # g{gap} a{angle}
-    t = linear_extrude(height=1)(t)
-    t = rotate((90,0,0))(t)
-    t = translate((-6, -1, 68))(t)
-    txt.add(t)
-    pdiff.add(txt)
-
-    # combine lattice with clipped poly
+    # export no-stamp scad file for better FEA (via STEP)
+    base_fname = f"lattice_dogbone_h{hsteps}_v{vsteps}"
+    scad_fname_ns = base_fname + "_ns.scad"
+    
+    # combine lattice with clipped poly (but w/o text!)
     full_model = union()
     full_model.add(pdiff)
     full_model.add(isect)
     full_model = rotate((-90, 0, 0))(full_model)
 
-    base_fname = f"lattice_dogbone_h{hsteps}_v{vsteps}"
-    scad_fname = base_fname + ".scad"
-    stl_fname = base_fname + ".stl"
+    scad_render_to_file(full_model, scad_fname_ns)
 
-    #scad_render_to_file(tf, "lattice_dogbone.scad")
-    #scad_render_to_file(strands, "lattice_dogbone.scad")
-    #scad_render_to_file(pdiff, "lattice_dogbone.scad")
-    #scad_render_to_file(isect, "lattice_dogbone.scad")
+    # make text and remove from dogbone (=> relief)
+    txt = union()
+    t = text(text=f"h{hsteps}", size=6, spacing=1.2)  # g{gap} a{angle}
+    t = linear_extrude(height=1)(t)
+    t = rotate((90,0,0))(t)
+    t = translate((-8,-1, 75))(t)
+    txt.add(t)
+    t = text(text=f"v{vsteps}", size=6, spacing=1.2)  # g{gap} a{angle}
+    t = linear_extrude(height=1)(t)
+    t = rotate((90,0,0))(t)
+    t = translate((-8, -1, 68))(t)
+    txt.add(t)
+    angle = round(angle,2)
+    t = text(text=f"a{angle}", size=6, spacing=1.2)  # g{gap} a{angle}
+    t = linear_extrude(height=1)(t)
+    t = rotate((90,0,0))(t)
+    t = rotate((0,90,0))(t)
+    t = translate((-3, -1, 66))(t)
+    txt.add(t)
+    scad_render_to_file(txt, "text.scad")
+    pdiff.add(txt)
+
+    # combine lattice with clipped poly this time with text
+    full_model = union()
+    full_model.add(pdiff)
+    full_model.add(isect)
+    full_model = rotate((-90, 0, 0))(full_model)
+
+    # Convert *_ns.scad to STEP using FreeCAD https://gist.github.com/slazav/4853bd36669bb9313ddb83f51ee1cb82
+    # path to FreeCAD.so (dll module on Win10)
+    FREECADPATH = r'C:\Program Files\FreeCAD 0.19\bin'
+    import sys
+    sys.path.append(FREECADPATH)
+
+    import FreeCAD
+    import Part
+
+    # Openscad import settings according to https://forum.lulzbot.com/viewtopic.php?t=243
+    p=FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/OpenSCAD")
+    p.SetBool('useViewProviderTree',True)
+    p.SetBool('useMultmatrixFeature',True)
+    # For some reason conversion does not work with cylinders created from extruded 2d circles.
+    # So I set MaxFN large enough and use smaller $fn in my step files to export such cylinders as polygons.
+    # If you use only normal cylinders, no need to use so large number here.
+    p.SetInt('useMaxFN',99)
+
+    print("Rendering ", scad_fname_ns)
+    FreeCAD.loadFile(scad_fname_ns) # load scad file and render(!), so this may take a couple of minutes!
+
+
+    # iterate through all objects
+    for o in App.ActiveDocument.Objects: # no idea where App comes from ...
+        # find root object and export the shape
+        if len(o.InList) == 0:
+            STEP_fname_ns = "step\\" + base_fname + "_ns.STEP"
+            o.Shape.exportStep(STEP_fname_ns)
+            print("Exported", scad_fname_ns, "to", base_fname + "_ns.STEP")
+    
+    # Save with-stamp scad file and convert to STL using opencad CLI
+    stl_fname = "stl\\" + base_fname + ".stl"
+    scad_fname = base_fname + ".scad"
     scad_render_to_file(full_model, scad_fname)
 
     # https://en.m.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_OpenSCAD_in_a_command_line_environment
@@ -150,8 +194,8 @@ def make_stl(cyl_rad, hsteps, vsteps):
 
     print(f"Converting {scad_fname} to {stl_fname}")
     import os
-    os.system(command)
-
+    os.system(command)   # render with stamp version of scad into STL
+    print("Exported",  stl_fname)
 # MAIN
 
 rad = 1.6
@@ -161,8 +205,15 @@ vsteps = 12
 
 #make_stl(rad, hsteps, vsteps)
 #make_stl(rad, 1, 1.78)
-#make_stl(rad, 2, 24)
-for vsteps in (48, 52, 56, 60):
+#make_stl(rad, 1, 6)
+
+for vsteps in (1.5, 2, 2.5, 3, 5, 6):
+    make_stl(rad, 1, vsteps)
+for vsteps in range(8, 33, 4):
+    make_stl(rad, 2, vsteps)
+for vsteps in range(12, 41, 4):
+    make_stl(rad, 3, vsteps)
+for vsteps in range(20, 61, 4):
     make_stl(rad, 4, vsteps)
 
 print("done")
