@@ -23,7 +23,7 @@ This shows the pre-clip lattice:
 ![](/imgs/dogbones.PNG)
 
 ## File format conversions
-- Initial model is created programatically in SCAD (but using https://github.com/SolidCode/SolidPython) and saved in a scad file (which are not pushed to github as it's just an intermediate format)
+- Initial model is created programatically in SCAD (but using https://github.com/SolidCode/SolidPython) and saved in a scad file (which is not pushed to github as it's just an intermediate format)
 - I create a "no-stamp" version first (w/o the parameters relief-printed) and save this as *_ns.scad, then add the reliefs and save this as *.scad
 - The no-stamp model file is then loaded/imported into FreeCAD (using its Python package/binding), rendered (which takes a long time!) and then exported into a STEP file (step folder)
 - The with-stamp model file is given to the CLI version of Open SCAD, rendered and exported as STL (stl folder) 
@@ -31,7 +31,7 @@ This shows the pre-clip lattice:
 ## Preview and Downloading
 - STL files can be previewed on github
 - stl/combos contains some collections of models I made so that their parameter changes can more easily be compared.
-- STEP files __cannot__ be previewed (well, the show up as text files ...)
+- STEP files __cannot__ be previewed (well, they show up as text files ...)
 - To download a STEP file, right-click on its name/link on the left column) and save it manually with something like _Save link As.._
 
 ## Tensile strength test of 3D printed dogbones - links (ongoing)
